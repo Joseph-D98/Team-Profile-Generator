@@ -1,0 +1,22 @@
+.jumbotron {
+    border-radius: 0;
+    background-color: #af0000;
+}
+
+.jumbotron h1 {
+    color: #fcfcfc;
+    font-weight: bold;
+}
+
+.employee-card {
+    margin: 10px 25px 0;
+    box-shadow: 4px 4px 8px #717171;
+}
+
+.card-header {
+    background-color: #e1e1e1;
+}
+.card-title {
+    margin-right: 45px;
+}
+

@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const allEmployees = [];
+const team = [];
 
 // prompt to collects roles from user
 function employeeInformation() {
@@ -27,12 +27,11 @@ function employeeInformation() {
         } else if (val.name === "Intern") {
             internInformation();
         } else if (val.name === "Show Summary") {
-            makeHTML();
+            generateHTML(outputPath, render(team));
         };
     });
 };
 
-employeeInformation();
 
 // prompt to collect manager information
 function managerInformation() {
@@ -44,7 +43,7 @@ function managerInformation() {
         },
         {
             type: "input",
-            message: "What is your manager's id",
+            message: "What is your manager's ID",
             name: "id",
         },
         {
@@ -57,7 +56,10 @@ function managerInformation() {
             message: "What is your manager's office number",
             name: "number",
         },
-    ]).then(function() {
+    ]).then(function(answer) {
+        let manager = new Manager(answer.name, answer.id, answer.email, answer.number)
+        team.push(manager);
+
         employeeInformation()
     })
 }; 
@@ -72,7 +74,7 @@ function engineerInformation() {
         {
             type: "input",
             message: "What is your engineer's ID",
-            name: "ID",
+            name: "id",
         },
         {
             type: "input",
@@ -84,7 +86,10 @@ function engineerInformation() {
             message: "What is your engineer's GitHub username",
             name: "GitHub",
         },
-    ]).then(function () {
+    ]).then(function (answer) {
+        let engineer = new Engineer(answer.name, answer.id, answer.email, answer.GitHub)
+        team.push(engineer);
+
         employeeInformation()
     })
 }; 
@@ -100,7 +105,7 @@ function internInformation() {
         {
             type: "input",
             message: "What is your intern's ID",
-            name: "ID",
+            name: "id",
         },
         {
             type: "input",
@@ -112,7 +117,23 @@ function internInformation() {
             message: "What is your intern's school",
             name: "school",
         },
-    ]).then(function () {
+    ]).then(function (answer) {
+        let intern = new Intern(answer.name, answer.id, answer.email, answer.school)
+        team.push(intern);
+
         employeeInformation()
     })
-}; 
+};
+
+// write the answers to a new README file
+function generateHTML(fileName, data) {
+    fs.writeFile(fileName, data, "utf8", function (err) {
+        if (err) {
+            throw err;
+        }
+        console.log("You have successfully written your Employee Summary");
+    });
+};
+
+// Calls function to begin prompt for roles to enter
+employeeInformation();
