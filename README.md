@@ -17,5 +17,5 @@ A command line application used to dynamically generate a display of an engineer
   ## Demonstration
   Application Video: https://drive.google.com/file/d/1SKhWOp8i5hznyrQ8BzeOITn_oB4DxV9Y/view
 
-  ![](readme.png)
+  ![](readme.jpg)
 
